@@ -2,7 +2,7 @@ import pytest
 
 from src.modules.create_user.app.create_user_usecase import CreateUserUsecase
 from src.shared.helpers.errors.domain_errors import EntityError
-from src.shared.infra.repositories.user_repository_mock import UserRepositoryMock
+from src.shared.infra.repositories.mock.user_repository_mock import UserRepositoryMock
 
 
 class Test_CreateUserUsecase:

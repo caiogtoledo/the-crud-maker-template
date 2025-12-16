@@ -3,7 +3,7 @@ import pytest
 from src.modules.delete_user.app.delete_user_usecase import DeleteUserUsecase
 from src.shared.helpers.errors.domain_errors import EntityError
 from src.shared.helpers.errors.usecase_errors import NoItemsFound
-from src.shared.infra.repositories.user_repository_mock import UserRepositoryMock
+from src.shared.infra.repositories.mock.user_repository_mock import UserRepositoryMock
 
 
 class Test_DeleteUserUsecase:

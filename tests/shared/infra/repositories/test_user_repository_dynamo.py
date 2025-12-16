@@ -3,7 +3,7 @@ import os
 import pytest
 
 from src.shared.infra.repositories.user_repository_dynamo import UserRepositoryDynamo
-from src.shared.infra.repositories.user_repository_mock import UserRepositoryMock
+from src.shared.infra.repositories.mock.user_repository_mock import UserRepositoryMock
 
 
 class Test_UserRepositoryDynamo:

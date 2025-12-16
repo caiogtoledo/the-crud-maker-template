@@ -3,7 +3,7 @@ from decimal import Decimal
 from src.shared.domain.entities.user import User
 from src.shared.domain.enums.state_enum import STATE
 from src.shared.infra.dto.user_dynamo_dto import UserDynamoDTO
-from src.shared.infra.repositories.user_repository_mock import UserRepositoryMock
+from src.shared.infra.repositories.mock.user_repository_mock import UserRepositoryMock
 
 
 class Test_UserDynamoDto:

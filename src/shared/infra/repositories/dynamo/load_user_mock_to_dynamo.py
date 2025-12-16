@@ -3,7 +3,7 @@ from decimal import Decimal
 import boto3
 import dotenv
 from src.shared.infra.repositories.user_repository_dynamo import UserRepositoryDynamo
-from src.shared.infra.repositories.user_repository_mock import UserRepositoryMock
+from src.shared.infra.repositories.mock.user_repository_mock import UserRepositoryMock
 from src.shared.environments import Environments
 
 

@@ -6,8 +6,8 @@ class GetUserUsecase:
     def __init__(self, repo: IUserRepository):
         self.repo = repo
 
-    def __call__(self, user_id: int) -> User:
-        if type(user_id) != int:
+    def __call__(self, user_id: str) -> User:
+        if type(user_id) != str:
             raise EntityError("user_id")
         user = self.repo.get_user(user_id)
         return user

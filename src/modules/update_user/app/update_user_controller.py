@@ -26,7 +26,7 @@ class UpdateUserController:
                     fieldTypeReceived=request.data.get('user_id').__class__.__name__
                 )
 
-            user = self.UpdateUserUsecase(user_id=int(request.data.get('user_id')), new_name=request.data.get('new_name'))
+            user = self.UpdateUserUsecase(user_id=request.data.get('user_id'), new_name=request.data.get('new_name'))
 
             viewmodel = UpdateUserViewmodel(user=user)
 

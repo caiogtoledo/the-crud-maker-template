@@ -3,7 +3,7 @@ from src.shared.domain.enums.state_enum import STATE
 
 
 class UpdateUserViewmodel:
-    user_id: int
+    user_id: str
     name: str
     email: str
     state: STATE

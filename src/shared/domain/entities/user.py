@@ -10,9 +10,9 @@ class User(abc.ABC):
     email: str
     state: STATE
     MIN_NAME_LENGTH = 2
-    user_id: int
+    user_id: str
 
-    def __init__(self, name: str, email: str, state: STATE, user_id: int = None):
+    def __init__(self, name: str, email: str, state: STATE, user_id: str = None):
         if not User.validate_name(name):
             raise EntityError("name")
         self.name = name
@@ -21,11 +21,11 @@ class User(abc.ABC):
             raise EntityError("email")
         self.email = email
 
-        if type(user_id) == int:
-            if user_id < 0:
+        if type(user_id) == str:
+            if user_id == "":
                 raise EntityError("user_id")
 
-        if type(user_id) != int and user_id is not None:
+        if type(user_id) != str and user_id is not None:
             raise EntityError("user_id")
 
         self.user_id = user_id

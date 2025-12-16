@@ -16,7 +16,7 @@ class UserRepositoryDynamo(IUserRepository):
         return f"user#{user_id}"
 
     @staticmethod
-    def sort_key_format(user_id: int) -> str:
+    def sort_key_format(user_id: str) -> str:
         return f"#{user_id}"
 
     def __init__(self):
@@ -25,7 +25,7 @@ class UserRepositoryDynamo(IUserRepository):
                                        region=Environments.get_envs().region,
                                        partition_key=Environments.get_envs().dynamo_partition_key,
                                        sort_key=Environments.get_envs().dynamo_sort_key)
-    def get_user(self, user_id: int) -> User:
+    def get_user(self, user_id: str) -> User:
         resp = self.dynamo.get_item(partition_key=self.partition_key_format(user_id), sort_key=self.sort_key_format(user_id))
 
         if resp.get('Item') is None:
@@ -47,7 +47,6 @@ class UserRepositoryDynamo(IUserRepository):
     def create_user(self, new_user: User) -> User:
         print(f"repo entered.\n Repo:{self}")
         print(self.dynamo.dynamo_table.__dict__)
-        new_user.user_id = self.get_user_counter()
         print(f"nre user id: {new_user.user_id}")
         user_dto = UserDynamoDTO.from_entity(user=new_user)
         resp = self.dynamo.put_item(partition_key=self.partition_key_format(new_user.user_id),
@@ -55,7 +54,7 @@ class UserRepositoryDynamo(IUserRepository):
                                     is_decimal=True)
         return new_user
 
-    def delete_user(self, user_id: int) -> User:
+    def delete_user(self, user_id: str) -> User:
         resp = self.dynamo.delete_item(partition_key=self.partition_key_format(user_id), sort_key=self.sort_key_format(user_id))
 
         if "Attributes" not in resp:
@@ -63,7 +62,7 @@ class UserRepositoryDynamo(IUserRepository):
 
         return UserDynamoDTO.from_dynamo(resp['Attributes']).to_entity()
 
-    def update_user(self, user_id: int, new_name: str) -> User:
+    def update_user(self, user_id: str, new_name: str) -> User:
 
         user = self.get_user(user_id=user_id)
 
@@ -77,10 +76,6 @@ class UserRepositoryDynamo(IUserRepository):
         resp = self.dynamo.update_item(partition_key=self.partition_key_format(user_id), sort_key=self.sort_key_format(user_id), update_dict=item_to_update)
 
         return UserDynamoDTO.from_dynamo(resp['Attributes']).to_entity()
-
-    def get_user_counter(self) -> int:
-
-        return self.update_counter()
 
     def update_counter(self) -> int: #TODO fix this
         print("updating counter")

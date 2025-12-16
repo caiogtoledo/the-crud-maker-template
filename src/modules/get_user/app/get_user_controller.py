@@ -24,12 +24,8 @@ class GetUserController:
                     fieldTypeReceived=request.data.get('user_id').__class__.__name__
                 )
 
-            if not request.data.get('user_id').isdecimal():
-                raise EntityError("user_id")
-
-
             user = self.GetUserUsecase(
-                user_id=int(request.data.get('user_id'))
+                user_id=request.data.get('user_id')
             )
 
             viewmodel = GetUserViewmodel(user)

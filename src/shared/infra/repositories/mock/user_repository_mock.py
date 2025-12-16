@@ -8,17 +8,15 @@ from src.shared.helpers.errors.usecase_errors import NoItemsFound
 
 class UserRepositoryMock(IUserRepository):
     users: List[User]
-    user_counter: int
 
     def __init__(self):
         self.users = [
-            User(name="Bruno Soller", email="soller@soller.com", user_id=1, state=STATE.APPROVED),
-            User(name="Vitor Brancas", email="brancas@brancas.com", user_id=2, state=STATE.REJECTED),
-            User(name="João Vilas", email="bruno@bruno.com", user_id=3, state=STATE.PENDING)
+            User(name="Bruno Soller", email="soller@soller.com", user_id="1", state=STATE.APPROVED),
+            User(name="Vitor Brancas", email="brancas@brancas.com", user_id="2", state=STATE.REJECTED),
+            User(name="João Vilas", email="bruno@bruno.com", user_id="3", state=STATE.PENDING)
         ]
-        self.user_counter = 3
 
-    def get_user(self, user_id: int) -> User:
+    def get_user(self, user_id: str) -> User:
         for user in self.users:
             if user.user_id == user_id:
                 return user
@@ -29,17 +27,16 @@ class UserRepositoryMock(IUserRepository):
 
     def create_user(self, new_user: User) -> User:
         self.users.append(new_user)
-        self.user_counter += 1
         return new_user
 
-    def delete_user(self, user_id: int) -> User:
+    def delete_user(self, user_id: str) -> User:
         for idx, user in enumerate(self.users):
             if user.user_id == user_id:
                 return self.users.pop(idx)
 
         raise NoItemsFound("user_id")
 
-    def update_user(self, user_id: int, new_name: str) -> User:
+    def update_user(self, user_id: str, new_name: str) -> User:
         for user in self.users:
             if user.user_id == user_id:
                 user.name = new_name
@@ -47,5 +44,3 @@ class UserRepositoryMock(IUserRepository):
 
         raise NoItemsFound("user_id")
 
-    def get_user_counter(self) -> int:
-        return self.user_counter

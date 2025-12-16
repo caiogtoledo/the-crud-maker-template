@@ -60,7 +60,7 @@
       "method": "GET",
       "body": {
         "mimeType": "application/json",
-        "text": "{\n\t\"user_id\": \"1\"\n}"
+        "text": "{\n\t\"user_id\": \"2\"\n}"
       },
       "parameters": [],
       "headers": [
@@ -100,7 +100,7 @@
       "method": "PUT",
       "body": {
         "mimeType": "application/json",
-        "text": "{\n\t\"user_id\": \"1\",\n\t\"new_name\": \"John Doe Updated\"\n}"
+        "text": "{\n\t\"user_id\": \"2\",\n\t\"new_name\": \"Vitor Branco Updated\"\n}"
       },
       "parameters": [],
       "headers": [

@@ -7,9 +7,9 @@ class UpdateUserUsecase:
     def __init__(self, repo: IUserRepository):
         self.repo = repo
 
-    def __call__(self, user_id: int, new_name: str) -> User:
+    def __call__(self, user_id: str, new_name: str) -> User:
 
-        if type(user_id) != int:
+        if type(user_id) != str:
             raise EntityError("user_id")
         
         if type(new_name) != str:

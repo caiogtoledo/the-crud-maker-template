@@ -8,9 +8,9 @@ class UserDynamoDTO:
     name: str
     email: str
     state: STATE
-    user_id: int
+    user_id: str
 
-    def __init__(self, name: str, email: str, state: STATE, user_id: int):
+    def __init__(self, name: str, email: str, state: STATE, user_id: str):
         self.name = name
         self.email = email
         self.user_id = user_id
@@ -49,7 +49,7 @@ class UserDynamoDTO:
         return UserDynamoDTO(
             name=user_data["name"],
             email=user_data["email"],
-            user_id=int(user_data["user_id"]),
+            user_id=user_data["user_id"],
             state=STATE(user_data["state"])
         )
 

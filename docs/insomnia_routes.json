@@ -1,0 +1,141 @@
+{
+  "_type": "export",
+  "__export_format": 4,
+  "__export_date": "2025-12-16T10:00:00.000Z",
+  "__export_source": "insomnia.desktop.app:v2023.5.8",
+  "resources": [
+    {
+      "_id": "wrk_1",
+      "parentId": null,
+      "modified": 1678886400000,
+      "created": 1678886400000,
+      "name": "My CRUD",
+      "description": "",
+      "scope": "collection",
+      "_type": "workspace"
+    },
+    {
+      "_id": "fld_1",
+      "parentId": "wrk_1",
+      "modified": 1678886400000,
+      "created": 1678886400000,
+      "name": "User",
+      "description": "",
+      "environment": {},
+      "environmentPropertyOrder": null,
+      "_type": "request_group"
+    },
+    {
+      "_id": "req_1",
+      "parentId": "fld_1",
+      "modified": 1678886400000,
+      "created": 1678886400000,
+      "url": "http://localhost:8080/user",
+      "name": "Create User",
+      "description": "",
+      "method": "POST",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n\t\"name\": \"John Doe\",\n\t\"email\": \"johndoe@example.com\"\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -1678886400000,
+      "_type": "request"
+    },
+    {
+      "_id": "req_2",
+      "parentId": "fld_1",
+      "modified": 1678886400000,
+      "created": 1678886400000,
+      "url": "http://localhost:8080/user",
+      "name": "Get User",
+      "description": "",
+      "method": "GET",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n\t\"user_id\": \"1\"\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -1678886300000,
+      "_type": "request"
+    },
+    {
+      "_id": "req_3",
+      "parentId": "fld_1",
+      "modified": 1678886400000,
+      "created": 1678886400000,
+      "url": "http://localhost:8080/users",
+      "name": "Get All Users",
+      "description": "",
+      "method": "GET",
+      "body": {},
+      "parameters": [],
+      "headers": [],
+      "authentication": {},
+      "metaSortKey": -1678886200000,
+      "_type": "request"
+    },
+    {
+      "_id": "req_4",
+      "parentId": "fld_1",
+      "modified": 1678886400000,
+      "created": 1678886400000,
+      "url": "http://localhost:8080/user",
+      "name": "Update User",
+      "description": "",
+      "method": "PUT",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n\t\"user_id\": \"1\",\n\t\"new_name\": \"John Doe Updated\"\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -1678886100000,
+      "_type": "request"
+    },
+    {
+      "_id": "req_5",
+      "parentId": "fld_1",
+      "modified": 1678886400000,
+      "created": 1678886400000,
+      "url": "http://localhost:8080/user",
+      "name": "Delete User",
+      "description": "",
+      "method": "DELETE",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n\t\"user_id\": \"1\"\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -1678886000000,
+      "_type": "request"
+    }
+  ]
+}

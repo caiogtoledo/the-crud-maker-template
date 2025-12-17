@@ -67,7 +67,10 @@ class FlaskHttpRequest(HttpRequest):
         self.method = flask_request.method
         self.path = flask_request.path
         self.headers = flask_request.headers
-        self.query_params = flask_request.args
+        
+        merged_query_params = {**flask_request.args, **flask_request.view_args}
+        self.query_params = merged_query_params
+        
         self.body = flask_request.get_json(silent=True)
         self.form_data = {
             "file": flask_request.files.to_dict(flat=False),
@@ -93,7 +96,16 @@ class FlaskHttpRequest(HttpRequest):
 
     @property
     def data(self) -> dict:
-        return self.get_data().get("body") or self.get_data().get("query_params")
+        request_data = {}
+        query_params = self.get_data().get("query_params")
+        body = self.get_data().get("body")
+
+        if query_params:
+            request_data.update(query_params)
+        if body:
+            request_data.update(body)
+            
+        return request_data
 
     @data.setter
     def data(self, value: dict):

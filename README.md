@@ -1,8 +1,8 @@
-# The CRUD Maker Template 🍽️
+# The CRUD Maker Template 🤩
 
 A template for Python CRUD applications based on Clean Architecture.
 
-### Introduction and Objectives ⁉
+### Introduction and Objectives 🎯
 
 The main objective is to provide a template for creating robust and maintainable CRUD (Create, Read, Update, Delete) applications. This architecture is based on the principles of Clean Architecture, promoting separation of concerns and scalability.
 

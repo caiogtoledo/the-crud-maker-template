@@ -7,14 +7,24 @@ from src.shared.helpers.errors.usecase_errors import NoItemsFound
 
 
 class UserRepositoryMock(IUserRepository):
+    _instance = None
+    _initialized = False
+    
     users: List[User]
 
+    def __new__(cls):
+        if cls._instance is None:
+            cls._instance = super().__new__(cls)
+        return cls._instance
+
     def __init__(self):
-        self.users = [
-            User(name="Bruno Soller", email="soller@soller.com", user_id="1", state=STATE.APPROVED),
-            User(name="Vitor Brancas", email="brancas@brancas.com", user_id="2", state=STATE.REJECTED),
-            User(name="João Vilas", email="bruno@bruno.com", user_id="3", state=STATE.PENDING)
-        ]
+        if not self._initialized:
+            self.users = [
+                User(name="Bruno Soller", email="soller@soller.com", user_id="1", state=STATE.APPROVED),
+                User(name="Vitor Brancas", email="brancas@brancas.com", user_id="2", state=STATE.REJECTED),
+                User(name="João Vilas", email="bruno@bruno.com", user_id="3", state=STATE.PENDING)
+            ]
+            self._initialized = True
 
     def get_user(self, user_id: str) -> User:
         for user in self.users:

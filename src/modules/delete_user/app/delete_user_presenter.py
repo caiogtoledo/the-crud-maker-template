@@ -1,12 +1,22 @@
 from .delete_user_controller import DeleteUserController
 from .delete_user_usecase import DeleteUserUsecase
-from src.shared.environments import Environments
+from src.shared.environments import Environment
 from src.shared.helpers.external_interfaces.http_lambda_requests import LambdaHttpRequest, LambdaHttpResponse
+from src.shared.helpers.external_interfaces.http_flask import FlaskHttpRequest, FlaskHttpResponse
 
-repo = Environments.get_user_repo()()
-usecase = DeleteUserUsecase(repo)
+
+repos = Environment().get_repositories()
+user_repository = repos["user_repo"]
+
+usecase = DeleteUserUsecase(user_repository)
 controller = DeleteUserController(usecase)
 
+def flask_handler(request):
+    httpRequest = FlaskHttpRequest(request)
+    response = controller(httpRequest)
+    httpResponse = FlaskHttpResponse(response)
+    
+    return httpResponse.to_flask_response()
 
 def lambda_handler(event, context):
     httpRequest = LambdaHttpRequest(data=event)

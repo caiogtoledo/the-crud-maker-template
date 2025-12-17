@@ -1,13 +1,22 @@
 from .get_all_users_controller import GetAllUsersController
 from .get_all_users_usecase import GetAllUsersUsecase
-from src.shared.domain.repositories.user_repository_interface import IUserRepository
-from src.shared.environments import Environments
+from src.shared.environments import Environment
 from src.shared.helpers.external_interfaces.http_lambda_requests import LambdaHttpRequest, LambdaHttpResponse
+from src.shared.helpers.external_interfaces.http_flask import FlaskHttpRequest, FlaskHttpResponse
 
-repo: IUserRepository = Environments.get_user_repo()()
-usecase = GetAllUsersUsecase(repo)
+
+repos = Environment().get_repositories()
+user_repository = repos["user_repo"]
+
+usecase = GetAllUsersUsecase(user_repository)
 controller = GetAllUsersController(usecase)
 
+def flask_handler(request):
+    httpRequest = FlaskHttpRequest(request)
+    response = controller(httpRequest)
+    httpResponse = FlaskHttpResponse(response)
+    
+    return httpResponse.to_flask_response()
 
 def lambda_handler(event, context):
     httpRequest = LambdaHttpRequest(data=event)

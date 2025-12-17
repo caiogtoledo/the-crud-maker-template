@@ -1,186 +1,177 @@
-# clean_mss_template 🌡🍽
+# The CRUD Maker Template 🍽️
 
-Template for microservices repositories based in Clean Arch
-
-## The Project 📽
+A template for Python CRUD applications based on Clean Architecture.
 
 ### Introduction and Objectives ⁉
 
-The main objective is to provide a template for repositories that can be used as a starting point for new projects. This
-architecture is based on the Clean Architecture, and it was based in many other projects and books, articles that were
-mixed by the students of Mauá Institute of Technology, from the academic group Dev. Community Mauá.
-
-### Reasons 1️⃣3️⃣
-
-The project aims to help developers to start new projects with a good architecture, and with a good structure, so that anybody can create good applications.
+The main objective is to provide a template for creating robust and maintainable CRUD (Create, Read, Update, Delete) applications. This architecture is based on the principles of Clean Architecture, promoting separation of concerns and scalability.
 
 ### Clean Architecture 🧼🏰
 
-The purpose of the project is to learn and create a Clean Architecture for microservices stateless with AWS Lambda which is a way of structuring
-the code in layers, each of which has a
-specific responsibility. This architecture is based on the principles of SOLID and books like "Clean Architecture: A
-Craftsman's Guide to Software Structure and Design" by Robert C. Martin.
+The purpose of the project is to implement a Clean Architecture for stateless microservices. This approach structures the code in layers, each with a specific responsibility, based on SOLID principles. It helps in creating testable, maintainable, and independent components.
 
-We also tried to explain for new programmers in the mos intuitive way and you can see the explanation here: [Clean Architecture Figma](https://www.figma.com/file/CmfQcH2xbZyIszPX0iOxPp/Clean-Arch---HackaBeckas?node-id=0%3A1&t=B38vNfX3VSv6qtU7-1)
+### Folder Structure 🌳
 
-
-### Folder Structure 🎄🌴🌲🌳
-
-Our folder structure was developed specially for our projects. 
-
-
-```bash
-.
-├── iac
-├── src
-│   ├── modules
-│   │   ├── create_user
-│   │   │   └── app
-│   │   ├── delete_user
-│   │   │   └── app
-│   │   ├── get_user
-│   │   │   └── app
-│   │   └── update_user
-│   │       └── app
-│   └── shared
-│       ├── domain
-│       │   ├── entities
-│       │   ├── enums
-│       │   └── repositories
-│       ├── helpers
-│       │   ├── enum
-│       │   ├── errors
-│       │   ├── functions
-│       │   └── http
-│       └── infra
-│           ├── dto
-│           ├── external
-│           └── repositories
-└── tests
-    ├── modules
-    │   ├── create_user
-    │   │   └── app
-    │   ├── delete_user
-    │   │   └── app
-    │   ├── get_user
-    │   │   └── app
-    │   └── update_user
-    │       └── app
-    └── shared
-        ├── domain
-        │   └── entities
-        ├── helpers
-        └── infra
+The folder structure is organized to support the Clean Architecture principles, with a clear separation between modules and shared code.
 
 ```
+.
+|____tests
+| |____shared
+| | |____infra
+| | | |____dto
+| | | |____repositories
+| | |____domain
+| | | |____entities
+| | |____helpers
+| |____modules
+| | |____create_user
+| | | |____app
+| | |____update_user
+| | | |____app
+| | |____get_all_users
+| | | |____app
+| | |____delete_user
+| | | |____app
+| | |____get_user
+| | | |____app
+|____docs
+|____src
+| |____shared
+| | |____infra
+| | | |____dto
+| | | |____repositories
+| | | | |____mock
+| | | | |____dynamo
+| | | | |____mongodb
+| | | |____external
+| | | | |____dynamo
+| | | | | |____datasources
+| | |____decorators
+| | |____domain
+| | | |____enums
+| | | |____repositories
+| | | |____observability
+| | | |____entities
+| | |____helpers
+| | | |____enum
+| | | |____functions
+| | | |____errors
+| | | |____external_interfaces
+| |____modules
+| | |____create_user
+| | | |____app
+| | |____update_user
+| | | |____app
+| | |____get_all_users
+| | | |____app
+| | |____delete_user
+| | | |____app
+| | |____get_user
+| | | |____app
+```
 
+## Naming Conventions 📛
 
-## Name Format 📛
 ### Files and Directories 📁
 
-- Files have the same name as the classes
-- snake_case 🐍 (ex: `./app/create_user_controller.py`)
+-   Files are named after the classes they contain.
+-   Use **snake_case** (e.g., `create_user_controller.py`).
 
-### Classes 🕴
-- #### Pattern 📟
+### Classes 🕴️
 
-    - CamelCase 🐫🐪
-
-- #### Types 🧭
-
-    - **Interface** starts with "I" --> `IUserRepository`, `ISelfieRepository` 😀
-    - **Repository** have the same name as interface, without the "I" and the type in final (ex: `UserRepositoryMock`, `SelfieRepositoryDynamo`) 🥬
-    - **Controller** ends with "Controller" --> `CreateUserController`, `GetSelfieController` 🎮
-    - **Usecase** ends with "Usecase" --> `CreateUserUsecase`, `GetSelfieUsecase` 🏠
-    - **Viewmodel** ends with "Viewmodel" --> `CreateUserViewmodel`, `GetSelfieViewmodel` 👀
-    - **Presenter** ends with "Presenter" --> `CreateUserPresenter`, `GetSelfiePresenter`🎁
+-   Use **CamelCase** (e.g., `CreateUserController`).
+-   **Interfaces**: Start with `I` (e.g., `IUserRepository`).
+-   **Repository**: Same name as the interface without the `I`, and with the implementation type as a suffix (e.g., `UserRepositoryMock`, `UserRepositoryMongo`).
+-   **Controller**: Ends with `Controller` (e.g., `CreateUserController`).
+-   **Usecase**: Ends with `Usecase` (e.g., `CreateUserUsecase`).
+-   **Viewmodel**: Ends with `Viewmodel` (e.g., `CreateUserViewmodel`).
+-   **Presenter**: Ends with `Presenter` (e.g., `CreateUserPresenter`).
 
 ### Methods 👨‍🏫
 
-- snake_case 🐍
-- Try associate with a verb (ex: `create_user`, `get_user`, `update_selfie`)
+-   Use **snake_case**.
+-   Prefer verb-based names (e.g., `create_user`, `get_user`).
 
-### Variables 🅰
+### Variables 🅰️
 
-- snake_case 🐍
-- Avoid verbs
+-   Use **snake_case**.
+-   Avoid using verbs.
 
 ### Enums
 
-- SNAKE_CASE 🐍
-- File name ends with "ENUM" (ex: "STATE_ENUM")
+-   Enum members use **SNAKE_CASE**.
+-   File names use **snake_case** (e.g., `state_enum.py`).
 
 ### Tests 📄
 
-- snake_case 🐍
-- "test" follow by class name (ex: `test_cadastrar_usuario_valido`, `test_cadastrar_usuario_sem_email`)
-    - The files must start with "test" to pytest recognition
-
-### Commit 💢
-
-- Start with verb
-- Ends with emoji 😎
-
-
-## Architecture Diagram 🏗
-![img.png](docs/architecture_diagram.png)
-
-
-
+-   Use **snake_case**.
+-   File names must start with `test_` for pytest to discover them (e.g., `test_create_user_usecase.py`).
 
 ## Installation 👩‍💻
 
-Clone the repository using template
+1.  **Clone the repository**
 
-### Create virtual ambient in python (only first time)
+2.  **Create a virtual environment**
 
-###### Windows
-
+    ```bash
+    # For Windows
     python -m venv venv
 
-###### Linux
+    # For Linux/macOS
+    python3 -m venv venv
+    ```
 
-    virtualenv -p python3.9 venv
+3.  **Activate the virtual environment**
 
-### Activate the venv
+    ```bash
+    # For Windows
+    .\venv\Scripts\activate
 
-###### Windows:
-
-    venv\Scripts\activate
-
-###### Linux:
-
+    # For Linux/macOS
     source venv/bin/activate
+    ```
 
-### Install the requirements
+4.  **Install the requirements**
 
-    pip install -r requirements-dev.txt
+    ```bash
+    pip install -r requirements.txt
+    ```
 
-### Run the tests
+## Running the Project 🚀
 
-    pytest
+The application uses an environment variable `ENV` to determine which repository implementation to use.
 
-### To run local set .env file
+-   **local**: Uses mock repositories for development and testing.
+-   **dev, hml, prd**: Uses a MongoDB repository.
 
-    STAGE = TEST
+### To run locally:
 
+1.  Set the environment variable.
 
-## Contributors 💰🤝💰
+    ```bash
+    # For Windows (PowerShell)
+    $env:ENV="local"
 
-- Bruno Vilardi - [Brvilardi](https://github.com/Brvilardi) 👷‍♂️
-- Hector Guerrini - [hectorguerrini](https://github.com/hectorguerrini) 🧙‍♂️
-- João Branco - [JoaoVitorBranco](https://github.com/JoaoVitorBranco) 😎
-- Vitor Soller - [VgsStudio](https://github.com/VgsStudio) ☀
-- Lucas Duez - [Lucasdvs10](https://github.com/Lucasdvs10) 🤡
-- Rodrigo Morales - [RodrigoM2004](https://github.com/RodrigoM2004) 🚗
-- Lucas Milani - [LucasKiller](https://github.com/LucasKiller) 🔪
-- Rafael Rubio - [Rubiozito](https://github.com/Rubiozito) 🎸
+    # For Linux/macOS
+    export ENV=local
+    ```
 
-## Special Thanks 🙏
+2.  Run the Flask application.
 
+    ```bash
+    functions-framework --target=my_crud
+    ```
+    The application will be available at `http://127.0.0.1:8080`.
+
+### To run the tests:
+
+```bash
+pytest
+```
+
+## Special Thanks and References 🙏
+
+- [Clean MSS Template (Dev. Community Mauá)](https://github.com/Maua-Dev/clean_mss_template)
 - [Dev. Community Mauá](https://www.instagram.com/devcommunitymaua/)
 - [Clean Architecture: A Craftsman's Guide to Software Structure and Design](https://www.amazon.com.br/Clean-Architecture-Craftsmans-Software-Structure/dp/0134494164)
-- [Institute Mauá of Technology](https://www.maua.br/)
-
-
-

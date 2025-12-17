@@ -1,0 +1,11 @@
+{
+  "mcpServers": {
+    "theCrudMaker": {
+      "command": "uvx",
+      "args": [
+        "--from", "git+https://github.com/caiogtoledo/the-crud-maker-mcp",
+        "the-crud-maker-mcp"
+      ]
+    }
+  }
+}

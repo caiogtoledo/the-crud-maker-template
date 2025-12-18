@@ -1,11 +1,47 @@
 import json
+from flask import Flask
+from src.modules.create_user.app.create_user_presenter import flask_handler, lambda_handler
 
-from src.modules.create_user.app.create_user_presenter import lambda_handler
 
+class MockMultiDict:
+    def to_dict(self, flat=True):
+        return {}
+
+class MockRequest:
+    def __init__(self, json: dict, headers: dict, method: str = 'POST', path: str = '/create_user'):
+        self._json = json
+        self.headers = headers
+        self.method = method
+        self.path = path
+        self.args = {}
+        self.view_args = {}
+        self.files = MockMultiDict()
+        self.form = MockMultiDict()
+
+    def get_json(self, silent=False):
+        return self._json
 
 class Test_CreateUserPresenter:
 
-    def test_create_user(self):
+    def test_create_user_flask(self):
+        app = Flask(__name__)
+        with app.app_context():
+            request = MockRequest(
+                json={
+                    "name": "Test User",
+                    "email": "test@user.com"
+                },
+                headers={
+                    "Content-Type": "application/json"
+                }
+            )
+
+            response = flask_handler(request)
+
+            assert response.status_code == 201
+            assert json.loads(response.data)["message"] == "the user was created successfully"
+
+    def test_create_user_lambda(self):
         event = {
             "version": "2.0",
             "routeKey": "$default",

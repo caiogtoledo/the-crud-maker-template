@@ -3,7 +3,7 @@ from typing import List
 
 from src.shared.domain.entities.user import User
 from src.shared.domain.repositories.user_repository_interface import IUserRepository
-from src.shared.environments import Environments
+from src.shared.environments import Environment
 from src.shared.helpers.errors.usecase_errors import NoItemsFound
 from src.shared.infra.dto.user_dynamo_dto import UserDynamoDTO
 from src.shared.infra.external.dynamo.datasources.dynamo_datasource import DynamoDatasource
@@ -20,11 +20,11 @@ class UserRepositoryDynamo(IUserRepository):
         return f"#{user_id}"
 
     def __init__(self):
-        self.dynamo = DynamoDatasource(endpoint_url=Environments.get_envs().endpoint_url,
-                                       dynamo_table_name=Environments.get_envs().dynamo_table_name,
-                                       region=Environments.get_envs().region,
-                                       partition_key=Environments.get_envs().dynamo_partition_key,
-                                       sort_key=Environments.get_envs().dynamo_sort_key)
+        self.dynamo = DynamoDatasource(endpoint_url=Environment.get_envs().endpoint_url,
+                                       dynamo_table_name=Environment.get_envs().dynamo_table_name,
+                                       region=Environment.get_envs().region,
+                                       partition_key=Environment.get_envs().dynamo_partition_key,
+                                       sort_key=Environment.get_envs().dynamo_sort_key)
     def get_user(self, user_id: str) -> User:
         resp = self.dynamo.get_item(partition_key=self.partition_key_format(user_id), sort_key=self.sort_key_format(user_id))
 

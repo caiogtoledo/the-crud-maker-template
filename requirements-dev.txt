@@ -7,3 +7,6 @@ bcrypt==4.3.0
 requests==2.32.5
 uv==0.9.18
 pytest==9.0.2
+
+# Se usar DynamoDB
+boto3

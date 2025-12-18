@@ -20,7 +20,7 @@ class Test_DeleteUserPresenter:
                 "header2": "value1,value2"
             },
             "queryStringParameters": {
-                "parameter1": "1"
+                "parameter1": "2"
             },
             "requestContext": {
                 "accountId": "123456789012",
@@ -52,7 +52,7 @@ class Test_DeleteUserPresenter:
                 "time": "12/Mar/2020:19:03:58 +0000",
                 "timeEpoch": 1583348638390
             },
-            "body": '{"user_id": "1"}',
+            "body": '{"user_id": "2"}',
             "pathParameters": None,
             "isBase64Encoded": None,
             "stageVariables": None
@@ -60,10 +60,10 @@ class Test_DeleteUserPresenter:
 
         response = lambda_handler(event, None)
 
-        expected = {'user_id': 1,
-                     'name': 'Bruno Soller',
-                     'email': 'soller@soller.com',
-                     'state': 'APPROVED',
+        expected = {'user_id': "2",
+                     'name': 'Vitor Brancas',
+                     'email': 'brancas@brancas.com',
+                     'state': 'REJECTED',
                      'message': 'the user was deleted successfully'}
 
         assert json.loads(response["body"]) == expected

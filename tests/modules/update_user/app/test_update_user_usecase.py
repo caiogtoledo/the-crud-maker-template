@@ -7,9 +7,9 @@ from src.shared.infra.repositories.mock.user_repository_mock import UserReposito
 
 class Test_UpdateUserUsecase:
     def test_update_user_usecase(selfs):
-        repo = UserRepositoryMock()
+        repo = UserRepositoryMock(use_singleton=False)
         usecase = UpdateUserUsecase(repo=repo)
-        updated_user = usecase(user_id=1, new_name="Bruno Guirão MPNTM")
+        updated_user = usecase(user_id="1", new_name="Bruno Guirão MPNTM")
 
         assert updated_user.name == "Bruno Guirão MPNTM"
 
@@ -18,7 +18,7 @@ class Test_UpdateUserUsecase:
         usecase = UpdateUserUsecase(repo=repo)
 
         with pytest.raises(EntityError):
-            usecase(user_id="1", new_name="Bruno Guirão MPNTM")
+            usecase(user_id=1, new_name="Bruno Guirão MPNTM")
 
     def test_update_user_usecase_wrong_new_name(selfs):
         repo = UserRepositoryMock()

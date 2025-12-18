@@ -21,11 +21,11 @@ class Test_GetUserUsecase:
         usecase = GetUserUsecase(repo)
 
         with pytest.raises(NoItemsFound):
-            user = usecase(user_id=999)
+            user = usecase(user_id="999")
 
     def test_get_user_invalid_id(self):
         repo = UserRepositoryMock()
         usecase = GetUserUsecase(repo)
 
         with pytest.raises(EntityError):
-            user = usecase(user_id="invalid")
+            user = usecase(user_id=1)

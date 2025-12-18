@@ -9,7 +9,7 @@ class Environment:
             from src.shared.infra.repositories.mock.user_repository_mock import UserRepositoryMock
 
             return {
-                "user_repo": UserRepositoryMock(),
+                "user_repo": UserRepositoryMock(use_singleton=(self.env != "test")),
             }
 
         elif self.env in ["dev", "hml", "prd"]:

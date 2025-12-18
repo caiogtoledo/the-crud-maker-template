@@ -5,12 +5,12 @@ from src.shared.domain.enums.state_enum import STATE
 
 class Test_GetAllUsersViewmodel:
     all_users_list = [
-        User(user_id=1,
+        User(user_id="1",
              name="Lucas Duez",
              email="deuzexmachina@gmail.com",
              state=STATE.APPROVED),
 
-        User(user_id=2,
+        User(user_id="2",
              name="Laura Blablachan",
              email="laurinha@gmail.com",
              state=STATE.APPROVED),
@@ -22,13 +22,13 @@ class Test_GetAllUsersViewmodel:
         expected = {
             "all_users": [
                 {
-                    'user_id': 1,
+                    'user_id': "1",
                     'name': "Lucas Duez",
                     'email': "deuzexmachina@gmail.com",
                     'state': 'APPROVED',
                 },
                 {
-                    'user_id': 2,
+                    'user_id': "2",
                     'name': "Laura Blablachan",
                     'email': "laurinha@gmail.com",
                     'state': 'APPROVED',
@@ -43,7 +43,7 @@ class Test_GetAllUsersViewmodel:
 
     def test_user_viewmodel(self):
         viewmodel = UserViewmodel(
-            User(user_id=2,
+            User(user_id="2",
                  name="Laura Blablachan",
                  email="laurinha@gmail.com",
                  state=STATE.APPROVED),
@@ -52,7 +52,7 @@ class Test_GetAllUsersViewmodel:
         response = viewmodel.to_dict()
 
         expected = {
-                    'user_id': 2,
+                    'user_id': "2",
                     'name': "Laura Blablachan",
                     'email': "laurinha@gmail.com",
                     'state': 'APPROVED',

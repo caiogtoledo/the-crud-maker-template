@@ -48,19 +48,6 @@ class Test_GetUserController:
         assert response.status_code == 400
         assert response.body == "Field user_id isn't in the right type.\n Received: int.\n Expected: str"
 
-    def test_get_user_contoller_entity_error(self):
-        repo = UserRepositoryMock()
-        usecase = GetUserUsecase(repo=repo)
-        controller = GetUserController(usecase=usecase)
-
-        request = HttpRequest(query_params={
-            'user_id': 'abc'
-        })
-
-        response = controller(request=request)
-
-        assert response.status_code == 400
-        assert response.body == 'Field user_id is not valid'
 
     def test_get_user_controller_no_items_found(self):
         repo = UserRepositoryMock()

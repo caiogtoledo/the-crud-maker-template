@@ -60,19 +60,19 @@ class Test_GetAllUsersPresenter:
         expected_body = {
             "all_users": [
                 {
-                    'user_id': 1,
+                    'user_id': "1",
                     'name': "Bruno Soller",
                     'email': "soller@soller.com",
                     'state': 'APPROVED',
                 },
                 {
-                    'user_id': 2,
+                    'user_id': "2",
                     'name': "Vitor Brancas",
                     'email': "brancas@brancas.com",
                     'state': 'REJECTED',
                 },
                 {
-                    'user_id': 3,
+                    'user_id': "3",
                     'name': "João Vilas",
                     'email': "bruno@bruno.com",
                     'state': 'PENDING',

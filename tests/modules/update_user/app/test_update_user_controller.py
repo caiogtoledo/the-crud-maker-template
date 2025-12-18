@@ -6,22 +6,22 @@ from src.shared.infra.repositories.mock.user_repository_mock import UserReposito
 
 class Test_UpdateUserController:
     def test_update_user_controller(self):
-        repo = UserRepositoryMock()
+        repo = UserRepositoryMock(use_singleton=False)
         usecase = UpdateUserUsecase(repo=repo)
         controller = UpdateUserController(usecase=usecase)
 
         request = HttpRequest(body={
-            'user_id': "1",
+            'user_id': "3",
             'new_name': 'Branco do Branco Branco da Silva'
         })
 
         response = controller(request=request)
 
         assert response.status_code == 200
-        assert response.body['user_id'] == repo.users[0].user_id
+        assert response.body['user_id'] == repo.users[2].user_id
         assert response.body['name'] == 'Branco do Branco Branco da Silva'
-        assert response.body['email'] == repo.users[0].email
-        assert response.body['state'] == repo.users[0].state.value
+        assert response.body['email'] == repo.users[2].email
+        assert response.body['state'] == repo.users[2].state.value
         assert response.body['message'] == "the user was updated successfully"
 
     def test_update_user_controller_missing_user_id(self):

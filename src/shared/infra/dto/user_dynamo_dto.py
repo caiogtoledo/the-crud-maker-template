@@ -36,7 +36,7 @@ class UserDynamoDTO:
             "entity": "user",
             "name": self.name,
             "email": self.email,
-            "user_id": Decimal(self.user_id),
+            "user_id": self.user_id,
             "state": self.state.value
         }
 

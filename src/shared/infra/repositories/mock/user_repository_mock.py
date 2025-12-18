@@ -12,12 +12,18 @@ class UserRepositoryMock(IUserRepository):
     
     users: List[User]
 
-    def __new__(cls):
+    def __new__(cls, use_singleton: bool = True, *args, **kwargs):
+        if not use_singleton:
+            return super().__new__(cls)
+            
         if cls._instance is None:
             cls._instance = super().__new__(cls)
         return cls._instance
 
-    def __init__(self):
+    def __init__(self, use_singleton: bool = True):
+        if use_singleton and self._initialized:
+            return
+        
         if not self._initialized:
             self.users = [
                 User(name="Bruno Soller", email="soller@soller.com", user_id="1", state=STATE.APPROVED),

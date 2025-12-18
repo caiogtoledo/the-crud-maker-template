@@ -19,19 +19,6 @@ class Test_DeleteUserController:
             assert response.status_code == 200
             assert response.body['message'] == 'the user was deleted successfully'
 
-    def test_delete_user_controller_wrong_type(self):
-            repo = UserRepositoryMock()
-            usecase = DeleteUserUsecase(repo=repo)
-            controller = DeleteUserController(usecase=usecase)
-
-            request = HttpRequest(body={
-                'user_id': 'a'
-            })
-
-            response = controller(request=request)
-
-            assert response.status_code == 400
-            assert response.body == 'Field user_id is not valid'
 
     def test_delete_user_controller_missing_parameter(self):
             repo = UserRepositoryMock()

@@ -7,8 +7,8 @@ import pytest
 
 class Test_UserRepositoryMock:
     def test_get_user(self):
-        repo = UserRepositoryMock()
-        user = repo.get_user(1)
+        repo = UserRepositoryMock(use_singleton=False)
+        user = repo.get_user("1")
 
         assert user.name == "Bruno Soller"
         assert user.email == "soller@soller.com"
@@ -16,21 +16,21 @@ class Test_UserRepositoryMock:
         assert user.state == STATE.APPROVED
 
     def test_get_user_not_found(self):
-        repo = UserRepositoryMock()
+        repo = UserRepositoryMock(use_singleton=False)
         with pytest.raises(NoItemsFound):
             user = repo.get_user(69)
 
     def test_get_all_user(self):
-        repo = UserRepositoryMock()
+        repo = UserRepositoryMock(use_singleton=False)
         users = repo.get_all_user()
         assert len(users) == 3
 
     def test_create_user(self):
-        repo = UserRepositoryMock()
+        repo = UserRepositoryMock(use_singleton=False)
         user = User(
             name="Vitor Soller",
             email="dohype@vitin.com",
-            user_id=4,
+            user_id="4",
             state=STATE.PENDING
         )
 
@@ -42,25 +42,25 @@ class Test_UserRepositoryMock:
 
 
     def test_delete_user(self):
-        repo = UserRepositoryMock()
-        user = repo.delete_user(1)
+        repo = UserRepositoryMock(use_singleton=False)
+        user = repo.delete_user("1")
         assert user.name == "Bruno Soller"
         assert user.email == "soller@soller.com"
         assert user.state == STATE.APPROVED
 
     def test_delete_user_not_found(self):
-        repo = UserRepositoryMock()
+        repo = UserRepositoryMock(use_singleton=False)
         with pytest.raises(NoItemsFound):
             user = repo.delete_user(69)
 
     def test_update_user(self):
-        repo = UserRepositoryMock()
+        repo = UserRepositoryMock(use_singleton=False)
         user = repo.update_user("1", "Bruno Guirão")
 
         assert user.name == "Bruno Guirão"
         assert repo.users[0].name == "Bruno Guirão"
 
     def test_update_user_not_found(self):
-        repo = UserRepositoryMock()
+        repo = UserRepositoryMock(use_singleton=False)
         with pytest.raises(NoItemsFound):
             user = repo.update_user(69, "Bruno Guirão")

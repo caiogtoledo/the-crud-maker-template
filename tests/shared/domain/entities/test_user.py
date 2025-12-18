@@ -6,7 +6,7 @@ import pytest
 
 class Test_User:
     def test_user(self):
-        User(name="VITOR", email="21.01444-2@maua.br", user_id=1, state=STATE.APPROVED)
+        User(name="VITOR", email="21.01444-2@maua.br", user_id="1", state=STATE.APPROVED)
 
     def test_user_name_is_none(self):
         with pytest.raises(EntityError):
@@ -30,7 +30,7 @@ class Test_User:
 
     def test_user_user_id_is_not_int(self):
         with pytest.raises(EntityError):
-            User(name="VITOR", email="21.01444-2@maua.br", user_id="1", state=STATE.APPROVED)
+            User(name="VITOR", email="21.01444-2@maua.br", user_id=1, state=STATE.APPROVED)
 
     def test_user_user_id_is_negative(self):
         with pytest.raises(EntityError):

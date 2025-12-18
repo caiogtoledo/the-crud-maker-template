@@ -90,7 +90,7 @@ class Test_UserDynamoDto:
         assert user.state == repo.users[0].state
 
     def test_from_dynamo_to_entity(self):
-        dynamo_item = {'Item': {'user_id': Decimal('1'),
+        dynamo_item = {'Item': {'user_id': '1',
                                 'name': 'Bruno Soller',
                                 'SK': '#1',
                                 'state': 'APPROVED',
@@ -105,7 +105,7 @@ class Test_UserDynamoDto:
         expected_user = User(
             name="Bruno Soller",
             email="soller@soller.com",
-            user_id=1,
+            user_id="1",
             state=STATE.APPROVED
         )
 

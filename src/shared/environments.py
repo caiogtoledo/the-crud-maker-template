@@ -5,7 +5,7 @@ class Environment:
         self.env = self.get_env() or "local"
 
     def get_repositories(self):
-        if self.env == "local":
+        if self.env == "local" or self.env == "test":
             from src.shared.infra.repositories.mock.user_repository_mock import UserRepositoryMock
 
             return {

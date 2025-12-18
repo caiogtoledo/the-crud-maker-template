@@ -59,4 +59,3 @@ class UserRepositoryMock(IUserRepository):
                 return user
 
         raise NoItemsFound("user_id")
-
